@@ -49,7 +49,7 @@ function setup() {
 
   //access live webcam
   video = createCapture(VIDEO);
-  video.size(windowWidth, windowHeight);
+  //video.size(windowWidth, windowHeight);
   video.position(0,0);
 }
 
