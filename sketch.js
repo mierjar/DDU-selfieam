@@ -40,7 +40,7 @@ function setup() {
   if(message.toString()=="on")countdown();
 
   //når mqtt for beskeden "off" så vil den aktivere funktionen "showVideo"
-  if(message.toString()=="off")showVideo();
+  if(message.toString()=="off")showVideo(video.height);
   }) 
 
   // 
