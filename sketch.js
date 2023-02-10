@@ -40,7 +40,7 @@ function setup() {
   if(message.toString()=="on")countdown();
 
   //når mqtt for beskeden "off" så vil den aktivere funktionen "showVideo"
-  if(message.toString()=="off")showVideo(video.height);
+  if(message.toString()=="off")showVideo();
   }) 
 
   // 
@@ -51,6 +51,7 @@ function setup() {
   //access live webcam
   video = createCapture(VIDEO);
   video.size(640, 480);
+  video.hide()
 }
 
 function draw(){
