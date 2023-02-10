@@ -15,7 +15,7 @@ function setup() {
   fsBtn = select('#fsBtn')
 
   snapBtn.mousePressed(countdown)
-  relBtn.mousePressed(()=>window.location.reload())
+  relBtn.mousePressed(()=>window.location.reload(true))
   fsBtn.mousePressed(()=>select('body').elt.requestFullscreen())
 
   
@@ -74,7 +74,6 @@ function countdown() {
 //en takesnap funktion som der vil skjule det live webcam og gemme et screenshot som bliver vist
 function takesnap() {
   videoVisible = false
-  select('#counter').html('')
   image(video,0 , 0, 640, 480);
   setTimeout(showVideo, 5000)
 }
@@ -82,6 +81,7 @@ function takesnap() {
 //en funktion som vil "reset" kameret, den reseter counteren, sætter en background for at skjule det sidste billede og viser webcam igen
 function showVideo() {
   background(0)
+  select('#counter').html('')
   counter = 3
   videoVisible = true;
 
