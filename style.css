@@ -10,6 +10,7 @@ main{
     display:grid;
     place-items:center;
     overflow:hidden;
+    position:relative;
 }
 
 .buttons{
@@ -26,10 +27,8 @@ main{
     color:white;
 }
 #counter{
-    position:fixed;
+    position:absolute;
     z-index:2;
-    left:2rem;
-    top:2rem;
     font-size: 4rem;
     color:black;
     font-weight:bold;
