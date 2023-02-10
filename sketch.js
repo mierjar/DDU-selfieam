@@ -3,7 +3,8 @@ let client
 //en counter som er sat på 3 som tæller ned til når billedet bliver taget
 let counter = 3;
 //
-let video;
+let video
+let videoVisible = true
 let snapBtn, relBtn, fsBtn
 
 
@@ -43,14 +44,19 @@ function setup() {
   }) 
 
   // 
-  let c = createCanvas(windowWidth, windowHeight);
-  select('#canvasContainer').child(c)
+  let c = createCanvas(640, 480);
+  select('main').child(c)
   background(51);
 
   //access live webcam
   video = createCapture(VIDEO);
-  //video.size(windowWidth, windowHeight);
-  video.position(0,0);
+  video.size(640, 480);
+}
+
+function draw(){
+  if(videoVisible){
+    image(video, 0, 0, 640, 480)
+  }
 }
 
 //en countdown funktion som vil tæller ned med -1 og når den lander på 0 vil den "takesnap"
@@ -67,9 +73,9 @@ function countdown() {
 
 //en takesnap funktion som der vil skjule det live webcam og gemme et screenshot som bliver vist
 function takesnap() {
-  video.hide()
+  videoVisible = false
   select('#counter').html('')
-  image(video,320, 0, 976, 720, 0, 0);
+  image(video,0 , 0, 640, 480);
   setTimeout(showVideo, 5000)
 }
 
@@ -77,7 +83,7 @@ function takesnap() {
 function showVideo() {
   background(0)
   counter = 3
-  video.show();
+  videoVisible = true;
 
 }
 

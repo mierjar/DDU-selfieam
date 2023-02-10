@@ -28,8 +28,10 @@ main{
 #counter{
     position:fixed;
     z-index:2;
+    left:2rem;
+    top:2rem;
     font-size: 4rem;
-    color:whitesmoke;
+    color:black;
     font-weight:bold;
 
 }
