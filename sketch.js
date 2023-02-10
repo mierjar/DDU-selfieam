@@ -1,17 +1,22 @@
 //client er den variabel der bruges til at oprette forbindelse til mqtt serveren
 let client 
-//connectionDiv peger på et DIV element i HTML siden 
-let connectionDiv
 //en counter som er sat på 3 som tæller ned til når billedet bliver taget
 let counter = 3;
 //
 let video;
+let snapBtn, relBtn, fsBtn
 
 
 //setup er den funktion der kører, før selve web-appen starter 
 function setup() {
-  //tag fat i en div i HTML dokumentet - med id "connection"
-  connectionDiv = select('#connection')
+  snapBtn = select('#snapBtn')
+  relBtn = select('#relBtn')
+  fsBtn = select('#fsBtn')
+
+  snapBtn.mousePressed(countdown)
+  relBtn.mousePressed(()=>window.location.reload())
+  fsBtn.mousePressed(()=>select('body').elt.requestFullscreen())
+
   
   //forsøg at oprette forbindelse til MQTT serveren 
   client = mqtt.connect('wss://mqtt.nextservices.dk')
@@ -19,7 +24,6 @@ function setup() {
   //hvis forbindelsen lykkes kaldes denne funktion
   client.on('connect', (m) => {
     console.log('Client connected: ', m)
-    connectionDiv.html('You are now connected to mqtt.nextservices.dk')
   })
   
   //subscribe poå emnet programmering
@@ -30,8 +34,6 @@ function setup() {
     console.log('Received Message: ' + message.toString())
     console.log('On Topic: ' + topic)
 
-  //Sæt beskeden ind på hjemmesiden 
-  connectionDiv.html('Received message: <b>' + message + '</b> on topic: <b>' + topic + '</b>')
 
   //når mqtt for beskeden "on" så vil den aktivere funktionen "countdown"
   if(message.toString()=="on")countdown();
@@ -68,6 +70,7 @@ function takesnap() {
   video.hide()
   select('#counter').html('')
   image(video,320, 0, 976, 720, 0, 0);
+  setTimeout(showVideo, 5000)
 }
 
 //en funktion som vil "reset" kameret, den reseter counteren, sætter en background for at skjule det sidste billede og viser webcam igen
@@ -81,5 +84,7 @@ function showVideo() {
 function keyPressed(key){
   if(key.key=='Enter'){
     takesnap()
+    window.requestFullscreen()
   }
 }
+
